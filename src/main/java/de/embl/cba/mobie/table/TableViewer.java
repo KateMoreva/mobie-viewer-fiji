@@ -40,7 +40,7 @@ import de.embl.cba.tables.select.SelectionModel;
 import de.embl.cba.tables.tablerow.JTableFromTableRowsModelCreator;
 import de.embl.cba.tables.tablerow.TableRow;
 import de.embl.cba.tables.tablerow.TableRowListener;
-import de.embl.cba.tables.tablerow.TableRows;
+import de.embl.cba.tables.TableRows;
 import ij.gui.GenericDialog;
 import net.imglib2.type.numeric.ARGBType;
 import org.apache.commons.io.FilenameUtils;
@@ -62,7 +62,7 @@ import java.util.Map;
 
 import static de.embl.cba.tables.FileUtils.selectPathFromProjectOrFileSystem;
 import static de.embl.cba.tables.color.CategoryTableRowColumnColoringModel.DARK_GREY;
-import static de.embl.cba.tables.tablerow.TableRows.setTableCell;
+import static de.embl.cba.tables.TableRows.setTableCell;
 
 public class TableViewer< T extends TableRow > implements SelectionListener< T >, ColoringListener, TableRowListener
 {
@@ -270,7 +270,8 @@ public class TableViewer< T extends TableRow > implements SelectionListener< T >
 //		}
 
 		final ARGBType argbType = new ARGBType();
-		coloringModel.convert( tableRows.get( row ), argbType );
+		final T tableRow = tableRows.get( row );
+		coloringModel.convert( tableRow, argbType );
 
 		if ( ARGBType.alpha( argbType.get() ) == 0 )
 			return Color.WHITE;
